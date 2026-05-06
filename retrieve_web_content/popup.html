@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>AI网页分析</title>
+    <style>
+        body {
+            width: 400px; /* 加宽适配批量列表 */
+            padding: 20px;
+            font-family: "Microsoft Yahei", sans-serif;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .btn {
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .extract-btn {
+            background: #4285F4;
+            color: white;
+        }
+        .extract-btn:hover {
+            background: #3367D6;
+        }
+        .batch-btn {
+            background: #34A853;
+            color: white;
+        }
+        .batch-btn:hover {
+            background: #2D8C46;
+        }
+        .history-btn {
+            background: #F5F5F5;
+            color: #333;
+            border: 1px solid #E0E0E0;
+        }
+        .history-btn:hover {
+            background: #E8E8E8;
+        }
+        #result {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #666;
+            min-height: 80px;
+        }
+        .tip {
+            font-size: 12px;
+            color: #999;
+            text-align: center;
+            margin-top: 10px;
+        }
+        /* 批量提取列表样式 */
+        .batch-container {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #E0E0E0;
+            border-radius: 8px;
+            padding: 10px;
+            display: none; /* 默认隐藏 */
+        }
+        .batch-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #F0F0F0;
+        }
+        .batch-header button {
+            padding: 4px 8px;
+            font-size: 12px;
+            background: #F5F5F5;
+            border: 1px solid #E0E0E0;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .tab-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 8px 0;
+            border-bottom: 1px solid #F8F8F8;
+        }
+        .tab-item:last-child {
+            border-bottom: none;
+        }
+        .tab-title {
+            font-size: 13px;
+            color: #333;
+            max-width: 350px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .tab-url {
+            font-size: 11px;
+            color: #999;
+            max-width: 350px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-top: 2px;
+        }
+        .batch-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            display: none; /* 默认隐藏 */
+        }
+        .batch-actions button {
+            flex: 1;
+            padding: 10px;
+            font-size: 14px;
+        }
+        .progress-bar {
+            height: 6px;
+            background: #F5F5F5;
+            border-radius: 3px;
+            margin-top: 10px;
+            display: none;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #4285F4;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">AI网页分析助手</div>
+        <!-- 核心功能按钮 -->
+        <button id="historyBtn" class="btn history-btn">📜 查看历史记录</button>
+        <button id="extractBtn" class="btn extract-btn">🚀 提取当前页面内容</button>
+        <button id="batchBtn" class="btn batch-btn">📦 批量提取所有标签页</button>
+        
+        <!-- 批量提取列表容器 -->
+        <div id="batchContainer" class="batch-container">
+            <div class="batch-header">
+                <span>所有标签页（共<span id="tabCount">0</span>个）</span>
+                <button id="selectAllBtn">全选/取消全选</button>
+            </div>
+            <div id="tabList"></div>
+        </div>
+        
+        <!-- 批量操作按钮 -->
+        <div id="batchActions" class="batch-actions">
+            <button id="cancelBatchBtn" class="btn history-btn">取消</button>
+            <button id="confirmBatchBtn" class="btn extract-btn">确认提取选中标签页</button>
+        </div>
+        
+        <!-- 进度条 -->
+        <div id="progressBar" class="progress-bar">
+            <div id="progressFill" class="progress-fill"></div>
+        </div>
+        
+        <!-- 结果展示区 -->
+        <div id="result">点击上方按钮，开始提取或查看历史记录～</div>
+        <div class="tip">提取结果将同步至微信小程序</div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!-- 主界面 -->
+<view class="container">
+  <!-- 卡片区域 -->
+  <view class="card-area" wx:if="{{cards.length > 0}}">
+    <view 
+      wx:for="{{cards}}" 
+      wx:key="id"
+      class="card" 
+      animation="{{cardAnimation[index]}}"
+      data-index="{{index}}"
+      bindtouchstart="onTouchStart"
+      bindtouchmove="onTouchMove"
+      bindtouchend="onTouchEnd"
+    >
+      <view class="card-content">
+        <view class="card-title">{{item.title}}</view>
+        <view class="card-desc">{{item.summary}}</view>
+        <view class="card-tags">
+          <text wx:for="{{item.categories}}" wx:for-item="tag" wx:key="*this" class="tag">{{tag}}</text>
+        </view>
+      </view>
+    </view>
+    
+    <view class="hints" wx:if="{{showLeftHint || showRightHint}}">
+      <view class="hint hint-left" wx:if="{{showLeftHint}}">👆 不感兴趣</view>
+      <view class="hint hint-right" wx:if="{{showRightHint}}">❤️ 收藏</view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-tip" wx:else>
+    <view class="empty-icon" wx:if="{{showLoginBtn}}">🔗</view>
+    <view class="empty-icon" wx:else>📋</view>
+    <view class="empty-text" wx:if="{{showLoginBtn}}">未绑定用户</view>
+    <view class="empty-text" wx:else>暂无待浏览内容</view>
+    <view class="empty-desc" wx:if="{{showLoginBtn}}">请扫描Chrome插件中的二维码绑定</view>
+    <view class="empty-desc" wx:else>请先在插件端提取网页内容</view>
+    <button class="bind-btn" type="primary" bindtap="goToBind" wx:if="{{showLoginBtn}}">去绑定</button>
+  </view>
+
+  <!-- 底部导航 -->
+  <view class="bottom-nav">
+    <button class="nav-btn" bindtap="goToHistory">
+      <view class="nav-icon">📖</view>
+      <view class="nav-text">历史记录</view>
+    </button>
+    <button class="nav-btn" bindtap="goToFavorites">
+      <view class="nav-icon">⭐</view>
+      <view class="nav-text">收藏夹</view>
+    </button>
+  </view>
+</view>

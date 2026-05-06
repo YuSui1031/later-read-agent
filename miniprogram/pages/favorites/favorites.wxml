@@ -1,0 +1,13 @@
+<!-- pages/favorites/favorites.wxml -->
+<view class="container">
+  <view wx:if="{{favorites.length > 0}}" class="favorites-list">
+    <view wx:for="{{favorites}}" wx:key="{{item.task_id || item.id}}" class="favorite-item" bindtap="navigateToDetail" data-taskid="{{item.task_id || item.id}}">
+      <text class="title">{{item.title}}</text>
+      <text class="description">{{item.description}}</text>
+      <button class="remove-btn" bindtap="removeFavorite" data-index="{{index}}">移除</button>
+    </view>
+  </view>
+  <view wx:else class="empty">
+    <text>暂无收藏</text>
+  </view>
+</view>

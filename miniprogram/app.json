@@ -1,0 +1,20 @@
+{
+  "pages": [
+    "pages/bind/bind",
+    "pages/explore/explore",
+    "pages/detail/detail",
+    "pages/favorites/favorites",
+    "pages/history/history",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "AI网页分析",
+    "navigationBarTextStyle": "black",
+    "enablePullDownRefresh": true
+  },
+  "style": "v2",
+  "componentFramework": "glass-easel",
+  "lazyCodeLoading": "requiredComponents"
+}

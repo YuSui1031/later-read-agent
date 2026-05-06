@@ -1,0 +1,48 @@
+<!-- pages/detail/detail.wxml -->
+  <view class="container">
+    <!-- 这是标题部分，保持不变 -->
+  <view class="title-row">
+    <button class="fav-btn" bindtap="toggleFavorite">
+      <text wx:if="{{!isFavorite}}">☆</text>
+      <text wx:if="{{isFavorite}}">★</text>
+    </button>
+    <view class="title">{{detail.title}}</view>
+  </view>
+  <!-- 从这里开始，用一个主卡片包裹所有内容模块 -->
+  <view class="main-card">
+    <!-- 分析摘要和时间 -->
+    <view class="content-section">
+      <view class="section-header">
+        <view class="section-title">分析摘要</view>
+        <view wx:if="{{detail.create_time}}" class="time-text">({{detail.create_time}})</view>
+      </view>
+      <view class="content">{{detail.summary}}</view>
+    </view>
+    
+    <!-- 模块间的分割线 -->
+    <view class="inner-divider"></view>
+    
+    <!-- 分类标签 -->
+    <view class="categories-section">
+      <text class="section-title">分类标签：</text>
+      <view class="categories">
+        <text wx:for="{{detail.categories}}" wx:key="*this" class="category-tag">{{item}}</text>
+      </view>
+    </view>
+    
+    <!-- 模块间的分割线 -->
+    <view class="inner-divider"></view>
+    
+    <!-- URL -->
+    <view class="url-section">
+      <text class="url-label">原文链接：</text>
+      <view class="url-content" bindtap="copyUrl">{{detail.url}}</view>
+    </view>
+  </view>
+  
+  <!-- 页面底部的操作按钮，保持在卡片之外 -->
+  <view class="action-buttons">
+    <button class="copy-btn" bindtap="copySummary">复制摘要</button>
+    <button class="view-btn" bindtap="navigateToUrl">查看原文</button>
+  </view>
+</view>
