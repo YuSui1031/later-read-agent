@@ -1,15 +1,18 @@
-# 敏感文件
+# 敏感文件（所有子目录）
 .env
 .env.local
 .env.*.local
+backend/.env
 
 # 数据库
 *.db
 *.sqlite
 *.sqlite3
+backend/*.db
 
 # Python
 __pycache__/
+**/__pycache__/
 *.py[cod]
 *$py.class
 *.egg-info/
@@ -35,3 +38,9 @@ Thumbs.db
 # Logs
 *.log
 logs/
+
+# Ruff cache
+.ruff_cache/
+
+# Redis dump
+dump.rdb

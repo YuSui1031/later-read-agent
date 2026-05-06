@@ -27,8 +27,7 @@ def analyze_with_ai(content: str) -> dict:
     # 检查 API_KEY
     from config import API_KEY
 
-    print(f"[AI服务] API_KEY 长度: {len(API_KEY) if API_KEY else 0}")
-    print(f"[AI服务] API_KEY 前10位: {API_KEY[:10] if API_KEY else 'None'}")
+    print(f"[AI服务] API_KEY 已配置: {'是' if API_KEY else '否'}")
 
     prompt = f"""
     请分析以下网页内容，完成两个任务：
